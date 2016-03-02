@@ -1,0 +1,8 @@
+<div class="cards-list" id="cards" swipe-right="CardsListVM.swipeRight()" swipe-left="CardsListVM.swipeLeft()">
+    <div class="removeButton icon-bin"
+         ng-click="CardsListVM.removeAction(CardsListVM.Card)"
+         ng-show="CardsListVM.cards.length"></div>
+    <a class="addButton icon-plus"
+        ui-sref="cards_add"></a>
+    <div class="empty" ng-hide="CardsListVM.cards.length" translate="CARDS.NOTIFY.EMPTY"></div>
+</div>

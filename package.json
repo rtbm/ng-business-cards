@@ -1,0 +1,51 @@
+{
+  "name": "ng-app",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "gulp build && cordova serve",
+    "device": "gulp build && cordova run",
+    "test": "karma start"
+  },
+  "author": "Marcin Bogusz <marcin@bogusz.cc>",
+  "license": "Proprietary software",
+  "dependencies": {
+    "del": "^2.2.0",
+    "imagemin-jpegtran": "^4.3.2"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "latest",
+    "babelify": "latest",
+    "browserify": "latest",
+    "concurrently": "latest",
+    "gulp": "latest",
+    "gulp-angular-templatecache": "latest",
+    "gulp-angular-translate": "latest",
+    "gulp-autoprefixer": "latest",
+    "gulp-concat": "latest",
+    "gulp-cssnano": "^2.1.0",
+    "gulp-data": "latest",
+    "gulp-if": "latest",
+    "gulp-imagemin": "latest",
+    "gulp-jade": "latest",
+    "gulp-less": "latest",
+    "gulp-ng-annotate": "latest",
+    "gulp-ng-constant": "latest",
+    "gulp-print": "latest",
+    "gulp-rename": "latest",
+    "gulp-replace": "latest",
+    "gulp-uglify": "latest",
+    "jasmine-core": "latest",
+    "karma": "latest",
+    "karma-chrome-launcher": "latest",
+    "karma-jasmine": "latest",
+    "merge-stream": "latest",
+    "node-static": "latest",
+    "vinyl-buffer": "latest",
+    "vinyl-source-stream": "latest",
+    "yargs": "latest"
+  }
+}

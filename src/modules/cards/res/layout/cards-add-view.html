@@ -1,0 +1,81 @@
+<form class="cards-add" ng-submit="$event.preventDefault()">
+    <h1 translate="CARDS.CREATE_NEW"></h1>
+
+    <div class="input-container">
+        <input ng-model="CardsAddVM.Card.name.first"
+               placeholder="{{ 'CARDS.NAME.FIST' | translate }}"
+               required/>
+    </div>
+
+    <div class="input-container">
+        <input ng-model="CardsAddVM.Card.name.last"
+               placeholder="{{ 'CARDS.NAME.LAST' | translate }}"
+               required/>
+    </div>
+
+    <div class="input-container">
+        <input ng-model="CardsAddVM.Card.company"
+               placeholder="{{ 'CARDS.COMPANY' | translate }}"/>
+    </div>
+
+    <div class="input-container">
+        <input ng-model="CardsAddVM.Card.phone.mobile"
+               placeholder="{{ 'CARDS.PHONE.MOBILE' | translate }}"/>
+    </div>
+
+    <div class="input-container">
+        <input ng-model="CardsAddVM.Card.phone.home"
+               placeholder="{{ 'CARDS.PHONE.HOME' | translate }}"/>
+    </div>
+
+    <div class="input-container">
+        <input ng-model="CardsAddVM.Card.network.email"
+               placeholder="{{ 'CARDS.NETWORK.EMAIL' | translate }}"/>
+    </div>
+
+    <div class="input-container">
+        <input ng-model="CardsAddVM.Card.network.website"
+               placeholder="{{ 'CARDS.NETWORK.WEBSITE' | translate }}"/>
+    </div>
+
+    <div class="input-container">
+        <input ng-model="CardsAddVM.Card.address.street"
+               placeholder="{{ 'CARDS.ADDRESS.STREET' | translate }}"/>
+    </div>
+
+    <div class="input-container">
+        <input ng-model="CardsAddVM.Card.address.po_box"
+               placeholder="{{ 'CARDS.ADDRESS.PO_BOX' | translate }}"/>
+    </div>
+
+    <div class="input-container">
+        <input ng-model="CardsAddVM.Card.address.neighbourhood"
+               placeholder="{{ 'CARDS.ADDRESS.NEIGHBOURHOOD' | translate }}"/>
+    </div>
+
+    <div class="input-container">
+        <input ng-model="CardsAddVM.Card.address.city"
+               placeholder="{{ 'CARDS.ADDRESS.CITY' | translate }}"/>
+    </div>
+
+    <div class="input-container">
+        <input ng-model="CardsAddVM.Card.address.state"
+               placeholder="{{ 'CARDS.ADDRESS.STATE' | translate }}"/>
+    </div>
+
+    <div class="input-container">
+        <input ng-model="CardsAddVM.Card.address.postcode"
+               placeholder="{{ 'CARDS.ADDRESS.POSTCODE' | translate }}"/>
+    </div>
+
+    <div class="input-container">
+        <input ng-model="CardsAddVM.Card.address.country"
+               placeholder="{{ 'CARDS.ADDRESS.COUNTRY' | translate }}"/>
+    </div>
+
+    <div class="actions">
+        <a class="button" ui-sref="cards" translate="APP.DISCARD"></a>
+        <button class="button" ng-click="CardsAddVM.save(CardsAddVM.Card)" translate="APP.SAVE"></button>
+    </div>
+
+</form>

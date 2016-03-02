@@ -1,0 +1,10 @@
+{
+  "APP": {
+    "SAVE": "Save",
+    "DISCARD": "Discard",
+    "CONFIRMATION": {
+      "OK": "OK",
+      "CANCEL": "Cancel"
+    }
+  }
+}

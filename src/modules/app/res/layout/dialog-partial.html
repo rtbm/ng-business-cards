@@ -1,0 +1,9 @@
+<div class="dialog">
+    <div class="content">
+        <p ng-bind="text"></p>
+        <div class="buttons" ng-class="{ 'buttons-2' : buttons.length > 1 }">
+            <button ng-repeat="button in buttons" ng-bind="button.text"
+                    ng-click="resolve(button.response)"></button>
+        </div>
+    </div>
+</div>

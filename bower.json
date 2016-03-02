@@ -1,0 +1,28 @@
+{
+  "name": "ng-app",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Marcin Bogusz <marcin@bogusz.cc>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "latest",
+    "angular-animate": "latest",
+    "angular-sanitize": "latest",
+    "angular-translate": "latest",
+    "angular-ui-router": "latest",
+    "roboto-fontface": "latest",
+    "a0-angular-storage": "latest",
+    "hammerjs": "hammer.js#^2.0.6",
+    "icomoon-bower": "icomoon#^0.1.0",
+    "lawnchair": "^0.6.4"
+  }
+}

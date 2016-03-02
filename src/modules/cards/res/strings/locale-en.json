@@ -1,0 +1,36 @@
+{
+  "CARDS":{
+    "CREATE_NEW": "Create new",
+    "NAME": {
+      "FIST": "First name",
+      "LAST": "Last name"
+    },
+    "COMPANY": "Company",
+    "PHONE": {
+      "MOBILE": "Mobile",
+      "HOME": "Home"
+    },
+    "NETWORK": {
+      "EMAIL": "E-mail",
+      "WEBSITE": "Website"
+    },
+    "ADDRESS": {
+      "STREET": "Street",
+      "PO_BOX": "PO Box",
+      "NEIGHBOURHOOD": "Neighbourhood",
+      "CITY": "City",
+      "STATE": "State",
+      "POSTCODE": "Postcode",
+      "COUNTRY": "Country"
+    },
+    "NOTIFY": {
+      "SAVED": "Card saved",
+      "EMPTY": "No cards to show yet! :("
+    },
+    "CONFIRMATION": {
+      "REMOVE": {
+        "TEXT": "Are you sure?"
+      }
+    }
+  }
+}
