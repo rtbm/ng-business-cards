@@ -8,10 +8,9 @@
     "prestart": "npm install",
     "start": "gulp build && cordova serve",
     "device": "gulp build && cordova run",
-    "test": "karma start"
   },
   "author": "Marcin Bogusz <marcin@bogusz.cc>",
-  "license": "Proprietary software",
+  "license": "MIT",
   "dependencies": {
     "del": "^2.2.0",
     "imagemin-jpegtran": "^4.3.2"
