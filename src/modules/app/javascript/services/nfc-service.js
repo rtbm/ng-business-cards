@@ -1,4 +1,4 @@
-function NfcService($q) {
+function NfcService ($q) {
     'ngInject';
     return {
         NdefListener: () => {

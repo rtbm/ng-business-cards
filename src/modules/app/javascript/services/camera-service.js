@@ -1,4 +1,4 @@
-function CameraService($q) {
+function CameraService ($q) {
     'ngInject';
     return {
         getPicture: (options) => {

@@ -1,30 +1,12 @@
 {
-  "CARDS":{
+  "CARDS": {
     "CREATE_NEW": "Create new",
-    "NAME": {
-      "FIST": "First name",
-      "LAST": "Last name"
-    },
-    "COMPANY": "Company",
-    "PHONE": {
-      "MOBILE": "Mobile",
-      "HOME": "Home"
-    },
-    "NETWORK": {
-      "EMAIL": "E-mail",
-      "WEBSITE": "Website"
-    },
-    "ADDRESS": {
-      "STREET": "Street",
-      "PO_BOX": "PO Box",
-      "NEIGHBOURHOOD": "Neighbourhood",
-      "CITY": "City",
-      "STATE": "State",
-      "POSTCODE": "Postcode",
-      "COUNTRY": "Country"
-    },
+    "PERSONAL_DATA": "Personal data",
+    "COMPANY_DATA": "Company data",
+    "OFFICE_DATA": "Office data",
     "NOTIFY": {
-      "SAVED": "Card saved",
+      "SAVED": "Card saved.",
+      "UPDATE": "Card updated.",
       "EMPTY": "No cards to show yet! :("
     },
     "CONFIRMATION": {

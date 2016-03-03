@@ -1,24 +1,31 @@
-<hgroup class="box box_1">
-    <h1>
-        <span ng-bind="Card.name.first"></span>
-        <span ng-bind="Card.name.last"></span>
-    </h1>
-    <h2 ng-bind="Card.company"></h2>
-</hgroup>
+<div class="content">
+    <hgroup class="box_2">
+        <h1 ng-bind="Card.name"></h1>
+        <h2 ng-bind="Card.position"></h2>
+    </hgroup>
 
-<div class="box box_2">
-    <div ng-bind="Card.address.street"></div>
-    <div ng-bind="Card.address.po_box"></div>
-    <div ng-bind="Card.address.neighbourhood"></div>
-    <div ng-bind="Card.address.postcode"></div>
-    <div ng-bind="Card.address.city"></div>
-    <div ng-bind="Card.address.state"></div>
-    <div ng-bind="Card.address.country"></div>
+    <div class="box_3 box">
+        <div ng-bind="Card.email"></div>
+        <div ng-bind="Card.phone"></div>
+        <div ng-bind="Card.website"></div>
+    </div>
+
+    <div class="box_1 box" ng-bind="Card.company"></div>
+
+    <div class="box_4 box">
+        <div ng-bind="Card.po_box"></div>
+        <div ng-bind="Card.street"></div>
+        <div>
+            <span ng-bind="Card.postcode"></span>
+            <span ng-bind="Card.city"></span>
+        </div>
+        <div>
+            <span ng-bind="Card.neighbourhood"></span>
+            <span ng-bind="Card.state"></span>
+            <span ng-bind="Card.country"></span>
+        </div>
+        <span ng-show="Card.tin">
+            <span translate="APP.TIN"></span>: <span ng-bind="Card.tin"></span>
+    </div>
 </div>
-
-<div class="box box_3">
-    <div ng-bind="Card.network.email"></div>
-    <div ng-bind="Card.network.website"></div>
-    <div ng-bind="Card.phone.mobile"></div>
-    <div ng-bind="Card.phone.home"></div>
 </div>

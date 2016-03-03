@@ -9,7 +9,7 @@ class CardsListController {
         this.CardsService = CardsService;
 
         this.offset = 0;
-        this.Card = false;
+        this.Card = {};
         this.swipeEnabled = true;
         this.previousCardScope = false;
         this.previousCardElement = false;
@@ -26,13 +26,16 @@ class CardsListController {
     }
 
     showCard (offset, cssClass) {
-        if(offset > -1) {
+        let cardScope;
+        let cardElement;
+
+        if (offset > -1) {
             this.Card = this.cards[offset];
 
-            var cardScope = this.$rootScope.$new();
+            cardScope = this.$rootScope.$new();
             cardScope = angular.extend(cardScope, { card: this.Card });
 
-            var cardElement = this.$compile('<card ng-model="card"></card>')(cardScope);
+            cardElement = this.$compile('<card ng-model="card"></card>')(cardScope);
 
             this.cardsElement.prepend(cardElement);
 
@@ -51,7 +54,7 @@ class CardsListController {
             this.previousCardElement.remove();
             this.previousCardScope.$destroy();
 
-            if(!!cardElement) {
+            if (!!cardElement) {
                 this.previousCardElement = cardElement;
                 this.previousCardScope = cardScope;
             }
@@ -78,7 +81,8 @@ class CardsListController {
     }
 
     removeAction (Card) {
-        this.$translate(['CARDS.CONFIRMATION.REMOVE.TEXT', 'APP.CONFIRMATION.OK', 'APP.CONFIRMATION.CANCEL'
+        this.$translate([
+            'CARDS.CONFIRMATION.REMOVE.TEXT', 'APP.CONFIRMATION.OK', 'APP.CONFIRMATION.CANCEL'
         ]).then((translations) => {
             this.removeCardConfirmation(translations).then((response) => {
                 if (response !== 'OK') {
@@ -87,8 +91,9 @@ class CardsListController {
 
                 this.removeCard(Card).then(() => {
                     this.cards.splice(this.offset, 1);
+                    this.Card = {};
 
-                    if(this.offset > 0) {
+                    if (this.offset > 0) {
                         this.offset--;
 
                     } else if (this.cards.length) {
@@ -97,8 +102,6 @@ class CardsListController {
                     } else {
                         this.offset = -1;
                     }
-
-                    console.log(this.offset);
 
                     this.showCard(this.offset, 'animateDown');
                 });

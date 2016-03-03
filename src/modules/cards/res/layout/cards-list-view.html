@@ -1,8 +1,11 @@
 <div class="cards-list" id="cards" swipe-right="CardsListVM.swipeRight()" swipe-left="CardsListVM.swipeLeft()">
-    <div class="removeButton icon-bin"
-         ng-click="CardsListVM.removeAction(CardsListVM.Card)"
+    <a class="btn btn-1 icon-plus" ui-sref="cards_add"></a>
+
+    <div class="btn btn-2 icon-bin" ng-click="CardsListVM.removeAction(CardsListVM.Card)"
          ng-show="CardsListVM.cards.length"></div>
-    <a class="addButton icon-plus"
-        ui-sref="cards_add"></a>
+
+    <a class="btn btn-3 icon-quill" ui-sref="cards_edit({ cardKey: CardsListVM.Card.key })"
+       ng-show="CardsListVM.Card.owner"></a>
+
     <div class="empty" ng-hide="CardsListVM.cards.length" translate="CARDS.NOTIFY.EMPTY"></div>
 </div>

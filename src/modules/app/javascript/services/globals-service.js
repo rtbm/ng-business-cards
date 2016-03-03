@@ -3,8 +3,8 @@ class GlobalsService {
         'ngInject';
         return {
             activeLanguage: ($translate.use()
-                || $translate.storage().get($translate.storageKey())
-                || $translate.preferredLanguage()),
+            || $translate.storage().get($translate.storageKey())
+            || $translate.preferredLanguage()),
 
             overlay: {
                 visible: false

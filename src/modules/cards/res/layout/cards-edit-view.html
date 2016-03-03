@@ -1,0 +1,106 @@
+<form class="cards-add" ng-submit="$event.preventDefault()">
+    <div class="section section-1">
+        <div class="header" ng-click="CardsEditVM.setStepAction(1, CardsEditVM.Card)"
+             ng-class="{ 'active' : CardsEditVM.step === 1 }" translate="CARDS.PERSONAL_DATA"></div>
+
+        <div class="content" ng-show="CardsEditVM.step === 1">
+            <div class="input-container">
+                <label translate="APP.NAME"></label>
+                <input type="text" ng-model="CardsEditVM.Card.name" required/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.PHONE"></label>
+                <input type="tel" ng-model="CardsEditVM.Card.phone"/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.EMAIL"></label>
+                <input type="text" ng-model="CardsEditVM.Card.email"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-2">
+        <div class="header" ng-click="CardsEditVM.setStepAction(2, CardsEditVM.Card)"
+             ng-class="{ 'active' : CardsEditVM.step === 2 }" translate="CARDS.COMPANY_DATA"></div>
+
+        <div class="content" ng-show="CardsEditVM.step === 2">
+            <div class="input-container">
+                <label translate="APP.COMPANY"></label>
+                <input type="text" ng-model="CardsEditVM.Card.company"/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.POSITION"></label>
+                <input type="tel" ng-model="CardsEditVM.Card.position"/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.TIN"></label>
+                <input type="text" ng-model="CardsEditVM.Card.tin"/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.WEBSITE"></label>
+                <input type="text" ng-model="CardsEditVM.Card.website"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-3">
+        <div class="header" ng-click="CardsEditVM.setStepAction(3, CardsEditVM.Card)"
+             ng-class="{ 'active' : CardsEditVM.step === 3 }" translate="CARDS.OFFICE_DATA"></div>
+
+        <div class="content" ng-show="CardsEditVM.step === 3">
+            <div class="input-container">
+                <label translate="APP.STREET"></label>
+                <input type="text" ng-model="CardsEditVM.Card.street"/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.PO_BOX"></label>
+                <input type="text" ng-model="CardsEditVM.Card.po_box"/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.NEIGHBOURHOOD"></label>
+                <input type="text" ng-model="CardsEditVM.Card.neighbourhood"/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.CITY"></label>
+                <input type="text" ng-model="CardsEditVM.Card.city"/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.STATE"></label>
+                <input type="text" ng-model="CardsEditVM.Card.state"/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.POSTCODE"></label>
+                <input type="text" ng-model="CardsEditVM.Card.postcode"/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.COUNTRY"></label>
+                <input type="text" ng-model="CardsEditVM.Card.country"/>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="actions">
+        <a class="button" ui-sref="cards" ng-show="CardsEditVM.step === 1" translate="APP.BACK"></a>
+
+        <button class="button" ng-click="CardsEditVM.setStepAction(CardsEditVM.step-1, CardsEditVM.Card);"
+                translate="APP.BACK" ng-show="CardsEditVM.step > 1"></button>
+
+        <button class="button" ng-click="CardsEditVM.setStepAction(CardsEditVM.step+1, CardsEditVM.Card);"
+                translate="APP.NEXT" ng-show="CardsEditVM.step < 3"></button>
+
+        <button class="button" ng-click="CardsEditVM.updateAction(CardsEditVM.Card)" translate="APP.SAVE"
+                ng-show="CardsEditVM.step === 3"></button>
+    </div>
+</form>

@@ -1,5 +1,5 @@
 class DialogService {
-    constructor($templateCache, $compile, $rootScope, $q, GlobalsService) {
+    constructor ($templateCache, $compile, $rootScope, $q, GlobalsService) {
         'ngInject';
         this.$templateCache = $templateCache;
         this.$compile = $compile;
@@ -12,14 +12,14 @@ class DialogService {
         }
     }
 
-    resolve(response) {
+    resolve (response) {
         this.el.dialog.remove();
         this.GlobalsService.overlay.visible = false;
         this.scope.$destroy();
         this.deffered.resolve(response);
     }
 
-    show(options) {
+    show (options) {
         let template = this.$templateCache.get('app/res/layout/dialog-partial.html');
 
         this.deffered = this.$q.defer();

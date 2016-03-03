@@ -1,5 +1,5 @@
 class AppController {
-    constructor(GlobalsService) {
+    constructor (GlobalsService) {
         'ngInject';
         this.GlobalsService = GlobalsService;
     }

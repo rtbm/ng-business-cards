@@ -1,10 +1,29 @@
 {
   "APP": {
+    "NAME": "Name",
+    "COMPANY": "Company",
+    "POSITION": "Position",
+    "TIN": "TIN",
+    "PHONE": "Phone",
+    "EMAIL": "E-mail",
+    "WEBSITE": "Website",
+    "STREET": "Street",
+    "PO_BOX": "PO Box",
+    "NEIGHBOURHOOD": "Neighbourhood",
+    "CITY": "City",
+    "STATE": "State",
+    "POSTCODE": "Postcode",
+    "COUNTRY": "Country",
     "SAVE": "Save",
+    "NEXT": "Next",
+    "BACK": "Back",
     "DISCARD": "Discard",
     "CONFIRMATION": {
       "OK": "OK",
       "CANCEL": "Cancel"
+    },
+    "REQUIRED": {
+      "NAME": "Field Name is required."
     }
   }
 }

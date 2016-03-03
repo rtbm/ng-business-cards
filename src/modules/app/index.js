@@ -22,7 +22,7 @@ export default angular.module('ngApp.app', [])
         'ngInject';
         $translateProvider.registerAvailableLanguageKeys(Config.languages);
         $translateProvider.determinePreferredLanguage();
-        $translateProvider.fallbackLanguage('en')
+        $translateProvider.fallbackLanguage('en');
     })
     .run(($state) => {
         'ngInject';

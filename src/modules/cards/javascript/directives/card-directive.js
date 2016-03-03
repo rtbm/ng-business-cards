@@ -1,4 +1,4 @@
-function CardDirective() {
+function CardDirective () {
     return {
         restrict: 'E',
         templateUrl: 'cards/res/layout/card-directive.html',

@@ -1,81 +1,106 @@
 <form class="cards-add" ng-submit="$event.preventDefault()">
-    <h1 translate="CARDS.CREATE_NEW"></h1>
+    <div class="section section-1">
+        <div class="header" ng-click="CardsAddVM.setStepAction(1, CardsAddVM.Card)"
+             ng-class="{ 'active' : CardsAddVM.step === 1 }" translate="CARDS.PERSONAL_DATA"></div>
 
-    <div class="input-container">
-        <input ng-model="CardsAddVM.Card.name.first"
-               placeholder="{{ 'CARDS.NAME.FIST' | translate }}"
-               required/>
+        <div class="content" ng-show="CardsAddVM.step === 1">
+            <div class="input-container">
+                <label translate="APP.NAME"></label>
+                <input type="text" ng-model="CardsAddVM.Card.name" required/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.PHONE"></label>
+                <input type="tel" ng-model="CardsAddVM.Card.phone"/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.EMAIL"></label>
+                <input type="text" ng-model="CardsAddVM.Card.email"/>
+            </div>
+        </div>
     </div>
 
-    <div class="input-container">
-        <input ng-model="CardsAddVM.Card.name.last"
-               placeholder="{{ 'CARDS.NAME.LAST' | translate }}"
-               required/>
+    <div class="section section-2">
+        <div class="header" ng-click="CardsAddVM.setStepAction(2, CardsAddVM.Card)"
+             ng-class="{ 'active' : CardsAddVM.step === 2 }" translate="CARDS.COMPANY_DATA"></div>
+
+        <div class="content" ng-show="CardsAddVM.step === 2">
+            <div class="input-container">
+                <label translate="APP.COMPANY"></label>
+                <input type="text" ng-model="CardsAddVM.Card.company"/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.POSITION"></label>
+                <input type="tel" ng-model="CardsAddVM.Card.position"/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.TIN"></label>
+                <input type="text" ng-model="CardsAddVM.Card.tin"/>
+            </div>
+
+            <div class="input-container">
+                <label translate="APP.WEBSITE"></label>
+                <input type="text" ng-model="CardsAddVM.Card.website"/>
+            </div>
+        </div>
     </div>
 
-    <div class="input-container">
-        <input ng-model="CardsAddVM.Card.company"
-               placeholder="{{ 'CARDS.COMPANY' | translate }}"/>
-    </div>
+    <div class="section section-3">
+        <div class="header" ng-click="CardsAddVM.setStepAction(3, CardsAddVM.Card)"
+             ng-class="{ 'active' : CardsAddVM.step === 3 }" translate="CARDS.OFFICE_DATA"></div>
 
-    <div class="input-container">
-        <input ng-model="CardsAddVM.Card.phone.mobile"
-               placeholder="{{ 'CARDS.PHONE.MOBILE' | translate }}"/>
-    </div>
+        <div class="content" ng-show="CardsAddVM.step === 3">
+            <div class="input-container">
+                <label translate="APP.STREET"></label>
+                <input type="text" ng-model="CardsAddVM.Card.street"/>
+            </div>
 
-    <div class="input-container">
-        <input ng-model="CardsAddVM.Card.phone.home"
-               placeholder="{{ 'CARDS.PHONE.HOME' | translate }}"/>
-    </div>
+            <div class="input-container">
+                <label translate="APP.PO_BOX"></label>
+                <input type="text" ng-model="CardsAddVM.Card.po_box"/>
+            </div>
 
-    <div class="input-container">
-        <input ng-model="CardsAddVM.Card.network.email"
-               placeholder="{{ 'CARDS.NETWORK.EMAIL' | translate }}"/>
-    </div>
+            <div class="input-container">
+                <label translate="APP.NEIGHBOURHOOD"></label>
+                <input type="text" ng-model="CardsAddVM.Card.neighbourhood"/>
+            </div>
 
-    <div class="input-container">
-        <input ng-model="CardsAddVM.Card.network.website"
-               placeholder="{{ 'CARDS.NETWORK.WEBSITE' | translate }}"/>
-    </div>
+            <div class="input-container">
+                <label translate="APP.CITY"></label>
+                <input type="text" ng-model="CardsAddVM.Card.city"/>
+            </div>
 
-    <div class="input-container">
-        <input ng-model="CardsAddVM.Card.address.street"
-               placeholder="{{ 'CARDS.ADDRESS.STREET' | translate }}"/>
-    </div>
+            <div class="input-container">
+                <label translate="APP.STATE"></label>
+                <input type="text" ng-model="CardsAddVM.Card.state"/>
+            </div>
 
-    <div class="input-container">
-        <input ng-model="CardsAddVM.Card.address.po_box"
-               placeholder="{{ 'CARDS.ADDRESS.PO_BOX' | translate }}"/>
-    </div>
+            <div class="input-container">
+                <label translate="APP.POSTCODE"></label>
+                <input type="text" ng-model="CardsAddVM.Card.postcode"/>
+            </div>
 
-    <div class="input-container">
-        <input ng-model="CardsAddVM.Card.address.neighbourhood"
-               placeholder="{{ 'CARDS.ADDRESS.NEIGHBOURHOOD' | translate }}"/>
-    </div>
+            <div class="input-container">
+                <label translate="APP.COUNTRY"></label>
+                <input type="text" ng-model="CardsAddVM.Card.country"/>
+            </div>
 
-    <div class="input-container">
-        <input ng-model="CardsAddVM.Card.address.city"
-               placeholder="{{ 'CARDS.ADDRESS.CITY' | translate }}"/>
-    </div>
-
-    <div class="input-container">
-        <input ng-model="CardsAddVM.Card.address.state"
-               placeholder="{{ 'CARDS.ADDRESS.STATE' | translate }}"/>
-    </div>
-
-    <div class="input-container">
-        <input ng-model="CardsAddVM.Card.address.postcode"
-               placeholder="{{ 'CARDS.ADDRESS.POSTCODE' | translate }}"/>
-    </div>
-
-    <div class="input-container">
-        <input ng-model="CardsAddVM.Card.address.country"
-               placeholder="{{ 'CARDS.ADDRESS.COUNTRY' | translate }}"/>
+        </div>
     </div>
 
     <div class="actions">
-        <a class="button" ui-sref="cards" translate="APP.DISCARD"></a>
-        <button class="button" ng-click="CardsAddVM.save(CardsAddVM.Card)" translate="APP.SAVE"></button>
-    </div>
+        <a class="button" ui-sref="cards" ng-show="CardsAddVM.step === 1" translate="APP.BACK"></a>
 
+        <button class="button" ng-click="CardsAddVM.setStepAction(CardsAddVM.step-1, CardsAddVM.Card);"
+                translate="APP.BACK" ng-show="CardsAddVM.step > 1"></button>
+
+        <button class="button" ng-click="CardsAddVM.setStepAction(CardsAddVM.step+1, CardsAddVM.Card);"
+                translate="APP.NEXT" ng-show="CardsAddVM.step < 3"></button>
+
+        <button class="button" ng-click="CardsAddVM.saveAction(CardsAddVM.Card)" translate="APP.SAVE"
+                ng-show="CardsAddVM.step === 3"></button>
+    </div>
 </form>

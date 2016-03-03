@@ -1,10 +1,10 @@
 class CardsService {
-    constructor($q) {
+    constructor ($q) {
         'ngInject';
         this.$q = $q;
     }
 
-    get(key, cb) {
+    get (key, cb) {
         let deferred = this.$q.defer();
 
         Lawnchair({ name: 'cards', record: 'Card' }, (cards) => {
@@ -18,7 +18,7 @@ class CardsService {
         return deferred.promise;
     }
 
-    save(Card, cb) {
+    save (Card, cb) {
         let deferred = this.$q.defer();
 
         Lawnchair({ name: 'cards', record: 'Card' }, (cards) => {
@@ -32,7 +32,7 @@ class CardsService {
         return deferred.promise;
     }
 
-    query(cb) {
+    query (cb) {
         let deferred = this.$q.defer();
 
         Lawnchair({ name: 'cards', record: 'Card' }, (cards) => {
@@ -46,7 +46,7 @@ class CardsService {
         return deferred.promise;
     }
 
-    remove(key, cb) {
+    remove (key, cb) {
         let deferred = this.$q.defer();
 
         Lawnchair({ name: 'cards', record: 'Card' }, (cards) => {

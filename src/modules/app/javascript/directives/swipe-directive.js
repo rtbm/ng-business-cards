@@ -5,11 +5,10 @@ function SwipeLeftDirective ($parse) {
         link: (scope, element, attr) => {
             let swipeHandler = $parse(attr['swipeLeft']);
             let mc = new Hammer(element[0], {
-                domEvents: true,
                 recognizers: [
-                    [Hammer.Swipe, { direction: Hammer.DIRECTION_HORIZONTAL }
-                    ]
-                ]});
+                    [Hammer.Swipe, { direction: Hammer.DIRECTION_HORIZONTAL }]
+                ]
+            });
 
             mc.on('swipeleft', (ev) => {
                 scope.$apply(() => {
@@ -28,7 +27,6 @@ function SwipeRightDirective ($parse) {
         link: (scope, element, attr) => {
             let swipeHandler = $parse(attr['swipeRight']);
             let mc = new Hammer(element[0], {
-                domEvents: true,
                 recognizers: [
                     [Hammer.Swipe, { direction: Hammer.DIRECTION_HORIZONTAL }]
                 ]

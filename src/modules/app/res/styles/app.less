@@ -5,8 +5,7 @@ html {
 }
 
 body {
-  font-family: 'Roboto';
-  font-size: 2.1rem;
+  font: 2.1rem/1.2em 'Roboto', sans-serif;
   font-weight: 300;
   user-select: none;
   background: white;
@@ -32,12 +31,20 @@ h1 {
 
 button, .button {
   font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 2.1rem;
-  background: lighten(@darkColor, 10%);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  background: transparent;
   color: @lightColor;
   padding: 1rem 2rem;
   border: 0 none;
+  min-width: 120px;
+  outline: 0;
+
+  &:disabled {
+    opacity: .8;
+    color: darken(@lightColor, 75%);
+  }
 }
 
 .input-container {

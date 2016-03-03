@@ -1,16 +1,63 @@
+@import '../../../app/res/styles/colors.less';
+
 .cards-add {
+  background: @darkColor;
+  color: @shadeColor;
   overflow-y: scroll;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   position: absolute;
-  padding: 0 2rem;
   box-sizing: border-box;
 
   h1 {
     text-align: center;
   }
 
+  .section {
+    & > .header:nth-child(1) {
+      padding: 1rem 0;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: darken(@shadeColor, 50%);
 
+      &.active {
+        color: @lightColor;
+      }
+    }
+
+    & > .content:nth-child(2) {
+      > .input-container {
+        margin: 0 0 .25rem;
+        border-bottom: .1rem solid darken(@shadeColor, 50%);
+        padding: 1rem 2rem;
+
+        > label:nth-child(1) {
+          font-size: 1.2rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          margin: 0 0 .5rem;
+          display: block;
+        }
+
+        > input:nth-child(2) {
+          border: .1rem solid darken(@shadeColor, 50%);
+          background: @darkColor;
+          color: @lightColor;
+
+          &:focus {
+            background: lighten(@darkColor, 10%);
+            border-color: @neonBlue;
+          }
+        }
+      }
+    }
+  }
+
+  .actions {
+    text-align: center;
+  }
 }
