@@ -3,13 +3,11 @@ import { CardsService } from './javascript/services/cards-service';
 import { CardsListController } from './javascript/controllers/cards-list-controller';
 import { CardsAddController } from './javascript/controllers/cards-add-controller';
 import { CardsEditController } from './javascript/controllers/cards-edit-controller';
-import { CardDirective } from './javascript/directives/card-directive';
 
 angular.module('ngApp.cards', [])
-    .config(CardsRoutes)
-    .service('CardsService', CardsService)
-    .controller('CardsListController', CardsListController)
-    .controller('CardsAddController', CardsAddController)
-    .controller('CardsEditController', CardsEditController)
-    .directive('card', CardDirective)
+  .config(CardsRoutes)
+  .service('CardsService', CardsService)
+  .controller('CardsListController', CardsListController)
+  .controller('CardsAddController', CardsAddController)
+  .controller('CardsEditController', CardsEditController)
 ;

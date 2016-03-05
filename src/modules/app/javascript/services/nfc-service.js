@@ -1,38 +1,50 @@
-function NfcService ($q) {
-    'ngInject';
-    return {
-        NdefListener: () => {
-            var q = $q.defer();
+function NfcService($q) {
+  'ngInject';
+  return {
+    NdefListener: () => {
+      const q = $q.defer();
 
-            var cb = (nfcEvent) => {
-                q.resolve(nfcEvent);
-            };
+      const cb = (nfcEvent) => {
+        q.resolve(nfcEvent);
+      };
 
-            nfc.addNdefListener(cb, () => {
-                q.notify('Waiting for NFC');
-            }, (err) => {
-                q.reject(err);
-            });
+      nfc.addNdefListener(cb, () => {
+        q.notify('Waiting for NFC');
+      }, (err) => {
+        q.reject(err);
+      });
 
-            q.promise.cancel = () => {
-                nfc.removeNdefListener(cb);
-            };
+      q.promise.cancel = () => {
+        nfc.removeNdefListener(cb);
+      };
 
-            return q.promise;
-        },
+      return q.promise;
+    },
 
-        writeTextRecord: (message) => {
-            var q = $q.defer();
+    writeTextRecord: (message) => {
+      const q = $q.defer();
 
-            nfc.write([ndef.textRecord(message)], (nfcEvent) => {
-                q.resolve(nfcEvent);
-            }, (err) => {
-                q.reject(err);
-            });
+      nfc.write([ndef.textRecord(message)], (nfcEvent) => {
+        q.resolve(nfcEvent);
+      }, (err) => {
+        q.reject(err);
+      });
 
-            return q.promise;
-        }
-    }
+      return q.promise;
+    },
+
+    shareTextRecord: (message) => {
+      const q = $q.defer();
+
+      nfc.write([share.textRecord(message)], (nfcEvent) => {
+        q.resolve(nfcEvent);
+      }, (err) => {
+        q.reject(err);
+      });
+
+      return q.promise;
+    },
+  };
 }
 
 export { NfcService };

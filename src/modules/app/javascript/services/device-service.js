@@ -1,22 +1,22 @@
-function DeviceService ($q) {
-    'ngInject';
-    return {
-        ready: () => {
-            let q = $q.defer();
+function DeviceService($q) {
+  'ngInject';
+  return {
+    ready: () => {
+      const q = $q.defer();
 
-            if ('ontouchstart' in window || navigator.maxTouchPoints) {
-                document.addEventListener('deviceready', () => {
-                    q.resolve();
-                });
-            } else {
-                angular.element(document).ready(() => {
-                    q.resolve();
-                }, false);
-            }
+      if ('ontouchstart' in window || navigator.maxTouchPoints) {
+        document.addEventListener('deviceready', () => {
+          q.resolve();
+        });
+      } else {
+        angular.element(document).ready(() => {
+          q.resolve();
+        }, false);
+      }
 
-            return q.promise;
-        }
-    }
+      return q.promise;
+    },
+  };
 }
 
 export { DeviceService };

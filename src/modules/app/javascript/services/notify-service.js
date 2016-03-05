@@ -1,43 +1,34 @@
 class NotifyService {
-    constructor ($templateCache, $compile, $rootScope, $q, $timeout, GlobalsService) {
-        'ngInject';
-        this.$templateCache = $templateCache;
-        this.$compile = $compile;
-        this.$rootScope = $rootScope;
-        this.$q = $q;
-        this.$timeout = $timeout;
-        this.GlobalsService = GlobalsService;
-        this.queue = [];
+  constructor($templateCache, $compile, $rootScope, $timeout) {
+    'ngInject';
+    this.$templateCache = $templateCache;
+    this.$compile = $compile;
+    this.$rootScope = $rootScope;
+    this.$timeout = $timeout;
 
-        this.el = {
-            body: angular.element(document.getElementsByTagName('body')[0])
-        }
+    this.body = angular.element(document.getElementsByTagName('body')[0]);
+  }
+
+  show(options, timeout) {
+    if(this.notify) {
+      this.hide();
     }
 
-    show (options, timeout) {
-        let template = this.$templateCache.get('app/res/layout/notify-partial.html');
+    let template = this.$templateCache.get('app/res/layout/notify-partial.html');
 
-        this.scope = this.$rootScope.$new();
-        this.scope = angular.extend(this.scope, options);
+    this.scope = this.$rootScope.$new();
+    this.scope =  angular.extend(this.scope, options);
 
-        let notify = this.$compile(template)(this.scope);
+    this.notify = this.$compile(template)(this.scope);
+    this.body.append(this.notify);
 
-        if (this.queue.length > 0) {
-            notify.css({
-                bottom: ((this.queue.length || 1) * 5) + 'rem'
-            });
-        }
+    this.timeout = this.$timeout(() => this.hide(), timeout || 2500);
+  }
 
-        this.queue.push(notify);
-        this.el.body.append(notify);
-
-        this.$timeout(() => this.hide(), timeout || 3000);
-    }
-
-    hide () {
-        let notify = this.queue.pop();
-        notify.remove();
-    }
+  hide() {
+    this.notify.remove();
+    this.scope.$destroy();
+  }
 }
 
 export { NotifyService };
