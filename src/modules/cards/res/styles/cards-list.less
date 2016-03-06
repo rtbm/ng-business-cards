@@ -9,6 +9,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
 
   > .card {
     display: block;
@@ -19,6 +20,7 @@
     left: 0;
     transition: .35s all linear;
     background: @lightColor;
+    z-index: 2;
 
     @media (orientation: portrait) {
       display: flex;
@@ -27,19 +29,24 @@
       align-items: center;
     }
 
-    &.animateLeft {
+    &[class^="animate-"],
+    &[class*=" animate-"] {
+      z-index: 3;
+    }
+
+    &.animate-left {
       transform: translateX(-100%);
     }
 
-    &.animateRight {
+    &.animate-right {
       transform: translateX(100%);
     }
 
-    &.animateDown {
+    &.animate-top{
       transform: translateY(-100%);
     }
 
-    &.animateDown {
+    &.animate-down {
       transform: translateY(100%);
     }
 
@@ -121,22 +128,20 @@
     }
   }
 
-  .btn {
+  .btns {
     position: absolute;
     right: 2rem;
-    z-index: 8;
+    top: 2rem;
+    z-index: 3;
     color: @darkColor;
 
-    &.btn-1 {
-      top: 2rem;
-    }
-
-    &.btn-2 {
-      top: 6rem;
-    }
-
-    &.btn-3 {
-      top: 10rem;
+    .btn {
+      display: block;
+      width: 3rem;
+      height: 3rem;
+      line-height: 3rem;
+      text-align: center;
+      margin: 0 0 1rem;
     }
   }
 

@@ -7,11 +7,16 @@
     "NOTIFY": {
       "SAVED": "Card saved.",
       "UPDATE": "Card updated.",
-      "EMPTY": "No cards to show yet! :("
+      "EMPTY": "No cards to show yet :/",
+      "NFC_DISABLED": "Turn on NFC an restart app.",
+      "ERROR": "Error occurred. Try again."
     },
-    "CONFIRMATION": {
+    "DIALOG": {
       "REMOVE": {
         "TEXT": "Are you sure?"
+      },
+      "SHARE": {
+        "TEXT": "Sharing via NFC"
       }
     }
   }

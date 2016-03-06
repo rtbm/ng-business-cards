@@ -18,10 +18,8 @@
     "NEXT": "Next",
     "BACK": "Back",
     "DISCARD": "Discard",
-    "CONFIRMATION": {
-      "OK": "OK",
-      "CANCEL": "Cancel"
-    },
+    "OK": "OK",
+    "CANCEL": "Cancel",
     "REQUIRED": {
       "NAME": "Field Name is required."
     }

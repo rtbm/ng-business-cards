@@ -1,14 +1,18 @@
 class CardsListController {
-  constructor($rootScope, $compile, $timeout, $translate, $templateCache, DialogService,
-    CardsService) {
+  constructor($q, $rootScope, $compile, $timeout, $translate, $templateCache, DeviceService,
+              DialogService, CardsService, NfcService, NotifyService) {
     'ngInject';
+    this.$q = $q;
     this.$rootScope = $rootScope;
     this.$compile = $compile;
     this.$timeout = $timeout;
     this.$translate = $translate;
     this.$templateCache = $templateCache;
+    this.DeviceService = DeviceService;
     this.DialogService = DialogService;
     this.CardsService = CardsService;
+    this.NfcService = NfcService;
+    this.NotifyService = NotifyService;
 
     this.offset = 0;
     this.Card = {};
@@ -19,12 +23,63 @@ class CardsListController {
     this.cardsElement = angular.element(document.getElementById('cards'));
     this.cardTemplate = this.$templateCache.get('cards/res/layout/card-partial.html');
 
-    this.CardsService.query((response) => {
-      this.cards = response;
+    this.onInit();
+  }
 
-      if (this.cards.length) {
-        this.showCard(0);
-      }
+  onInit() {
+    this.getCards().then(() => this.showCard(0));
+
+    this.isNfcEnabled().then(
+      () => this.setupReceiveNdefListener(),
+      () => this.showNfcDisabledNotify()
+    );
+  }
+
+  isNfcEnabled() {
+    const deferred = this.$q.defer();
+
+    this.DeviceService.ready().then(
+      () => this.NfcService.isEnabled().then(
+        () => deferred.resolve(),
+        () => deferred.reject()
+      )
+    );
+
+    return deferred.promise;
+  }
+
+  setupReceiveNdefListener() {
+    this.receiveNdefListener = this.NfcService.NdefListener();
+
+    this.receiveNdefListener.then(null, () => this.showErrorNotify(), (nfcEvent) => {
+      const card = ndef.textHelper.decodePayload(nfcEvent.tag.ndefMessage[0].payload);
+      const Card = angular.fromJson(card);
+
+      this.save(Card).then(() => {
+        this.getCards().then(() => this.showCard(this.cards.length - 1));
+      });
+    });
+  }
+
+  showNfcDisabledNotify() {
+    this.$translate(['CARDS.NOTIFY.NFC_DISABLED']).then((translations) => {
+      this.NotifyService.show({
+        text: translations['CARDS.NOTIFY.NFC_DISABLED'],
+      });
+    });
+  }
+
+  showErrorNotify() {
+    this.$translate(['CARDS.NOTIFY.ERROR']).then((translations) => {
+      this.NotifyService.show({
+        text: translations['CARDS.NOTIFY.ERROR'],
+      });
+    });
+  }
+
+  getCards() {
+    return this.CardsService.query((response) => {
+      this.cards = response;
     });
   }
 
@@ -66,27 +121,25 @@ class CardsListController {
     }, 250);
   }
 
-  swipeRight() {
+  swipeRightAction() {
     if (!this.cards.length || !this.swipeEnabled || this.offset === 0) {
       return;
     }
     this.offset--;
-    this.showCard(this.offset, 'animateRight');
+    this.showCard(this.offset, 'animate-right');
   }
 
-  swipeLeft() {
+  swipeLeftAction() {
     if (!this.cards.length || !this.swipeEnabled || this.offset === this.cards.length - 1) {
       return;
     }
     this.offset++;
-    this.showCard(this.offset, 'animateLeft');
+    this.showCard(this.offset, 'animate-left');
   }
 
   removeAction(Card) {
-    this.$translate([
-      'CARDS.CONFIRMATION.REMOVE.TEXT', 'APP.CONFIRMATION.OK', 'APP.CONFIRMATION.CANCEL',
-    ]).then((translations) => {
-      this.removeCardConfirmation(translations).then((response) => {
+    this.$translate(['CARDS.DIALOG.REMOVE.TEXT', 'APP.OK', 'APP.CANCEL']).then((translations) => {
+      this.removeConfirmationDialog(translations).then((response) => {
         if (response !== 'OK') {
           return;
         }
@@ -103,20 +156,20 @@ class CardsListController {
             this.offset = -1;
           }
 
-          this.showCard(this.offset, 'animateDown');
+          this.showCard(this.offset, 'animate-down');
         });
       });
     });
   }
 
-  removeCardConfirmation(translations) {
+  removeConfirmationDialog(translations) {
     return this.DialogService.show({
-      text: translations['CARDS.CONFIRMATION.REMOVE.TEXT'],
+      text: translations['CARDS.DIALOG.REMOVE.TEXT'],
       buttons: [{
-        text: translations['APP.CONFIRMATION.OK'],
+        text: translations['APP.OK'],
         response: 'OK',
       }, {
-        text: translations['APP.CONFIRMATION.CANCEL'],
+        text: translations['APP.CANCEL'],
         response: 'CANCEL',
       }],
     });
@@ -124,6 +177,55 @@ class CardsListController {
 
   removeCard(Card) {
     return this.CardsService.remove(Card.key);
+  }
+
+  shareActionDialog(translations) {
+    return this.DialogService.show({
+      text: translations['CARDS.DIALOG.SHARE.TEXT'],
+      buttons: [{
+        text: translations['APP.CANCEL'],
+        response: 'CANCEL',
+      }],
+    });
+  }
+
+  shareAction(Card) {
+    this.isNfcEnabled().then(() => {
+      this.$translate(['CARDS.DIALOG.SHARE.TEXT', 'APP.CANCEL']).then((translations) => {
+        const card = angular.extend({}, Card);
+
+        delete card.key;
+        delete card.owner;
+        delete card.createdAt;
+
+        this.receiveNdefListener.cancel();
+        this.shareNdefListener = this.NfcService.shareTextRecord(angular.toJson(card));
+
+        this.shareDialog = this.shareActionDialog(translations);
+
+        this.shareNdefListener.then(
+          () => this.shareDialog.cancel(),
+          () => this.showErrorNotify()
+        );
+
+        this.shareDialog.then(() => {
+          this.shareNdefListener.cancel();
+          this.setupReceiveNdefListener();
+        });
+      });
+    }, () => this.showNfcDisabledNotify());
+  }
+
+  save(Card) {
+    return this.CardsService.save(Card, () => this.showSavedNotify());
+  }
+
+  showSavedNotify() {
+    this.$translate(['CARDS.NOTIFY.SAVED']).then((translations) => {
+      this.NotifyService.show({
+        text: translations['CARDS.NOTIFY.SAVED'],
+      });
+    });
   }
 }
 

@@ -7,33 +7,33 @@ class DialogService {
     this.$q = $q;
     this.GlobalsService = GlobalsService;
 
-    this.el = {
-      body: angular.element(document.getElementsByTagName('body')[0]),
-    };
-  }
-
-  resolve(response) {
-    this.el.dialog.remove();
-    this.GlobalsService.overlay.visible = false;
-    this.scope.$destroy();
-    this.deffered.resolve(response);
+    this.body = angular.element(document.getElementsByTagName('body')[0]);
   }
 
   show(options) {
     const template = this.$templateCache.get('app/res/layout/dialog-partial.html');
 
-    this.deffered = this.$q.defer();
+    this.deferred = this.$q.defer();
 
     this.scope = this.$rootScope.$new();
     this.scope = angular.extend(this.scope, options);
-    this.scope.resolve = (response) => this.resolve(response);
+    this.scope.resolve = (response) => this.hide(response);
 
-    this.el.dialog = this.$compile(template)(this.scope);
-    this.el.body.append(this.el.dialog);
+    this.dialog = this.$compile(template)(this.scope);
+    this.body.append(this.dialog);
 
     this.GlobalsService.overlay.visible = true;
 
-    return this.deffered.promise;
+    this.deferred.promise.cancel = () => this.hide();
+
+    return this.deferred.promise;
+  }
+
+  hide(response) {
+    this.dialog.remove();
+    this.GlobalsService.overlay.visible = false;
+    this.scope.$destroy();
+    this.deferred.resolve(response);
   }
 }
 

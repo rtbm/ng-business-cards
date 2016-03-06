@@ -1,48 +1,63 @@
 function NfcService($q) {
   'ngInject';
   return {
+    isEnabled: () => {
+      const deferred = $q.defer();
+
+      nfc.enabled(
+        () => deferred.resolve(),
+        () => deferred.reject()
+      );
+
+      return deferred.promise;
+    },
+
     NdefListener: () => {
-      const q = $q.defer();
+      const deferred = $q.defer();
 
-      const cb = (nfcEvent) => {
-        q.resolve(nfcEvent);
+      nfc.addNdefListener(
+        (nfcEvent) => deferred.notify(nfcEvent),
+        null,
+        (err) => deferred.reject(err)
+      );
+
+      deferred.promise.cancel = () => {
+        nfc.removeNdefListener(
+          (nfcEvent) => deferred.resolve(nfcEvent)
+        );
       };
 
-      nfc.addNdefListener(cb, () => {
-        q.notify('Waiting for NFC');
-      }, (err) => {
-        q.reject(err);
-      });
-
-      q.promise.cancel = () => {
-        nfc.removeNdefListener(cb);
-      };
-
-      return q.promise;
+      return deferred.promise;
     },
 
     writeTextRecord: (message) => {
-      const q = $q.defer();
+      const deferred = $q.defer();
 
-      nfc.write([ndef.textRecord(message)], (nfcEvent) => {
-        q.resolve(nfcEvent);
-      }, (err) => {
-        q.reject(err);
-      });
+      nfc.write(
+        [ndef.textRecord(message)],
+        (nfcEvent) => deferred.resolve(nfcEvent),
+        (err) => deferred.reject(err)
+      );
 
-      return q.promise;
+      return deferred.promise;
     },
 
     shareTextRecord: (message) => {
-      const q = $q.defer();
+      const deferred = $q.defer();
 
-      nfc.write([share.textRecord(message)], (nfcEvent) => {
-        q.resolve(nfcEvent);
-      }, (err) => {
-        q.reject(err);
-      });
+      nfc.share(
+        [ndef.textRecord(message)],
+        (nfcEvent) => deferred.resolve(nfcEvent),
+        (err) => deferred.reject(err)
+      );
 
-      return q.promise;
+      deferred.promise.cancel = () => {
+        nfc.unshare((nfcEvent) => {
+          deferred.resolve(nfcEvent);
+        });
+      };
+
+      return deferred.promise;
     },
   };
 }
