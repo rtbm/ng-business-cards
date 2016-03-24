@@ -27,7 +27,13 @@ class CardsListController {
   }
 
   onInit() {
-    this.getCards().then(() => this.showCard(0));
+    this.getCards().then((cards) => {
+      if (!cards.length) {
+        return;
+      }
+      this.cards = cards;
+      this.showCard(0);
+    });
 
     this.isNfcEnabled().then(
       () => this.setupReceiveNdefListener(),
@@ -78,9 +84,7 @@ class CardsListController {
   }
 
   getCards() {
-    return this.CardsService.query((response) => {
-      this.cards = response;
-    });
+    return this.CardsService.query();
   }
 
   showCard(offset, cssClass) {

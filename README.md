@@ -1,6 +1,6 @@
 # ng-business-cards
 
-Cordova with Babel AngularJS
+App created with Cordova and Babel AngularJS for creating and sharing (via NFC) business cards.
 
 ```shell
 sudo npm -g install cordova bower gulp
